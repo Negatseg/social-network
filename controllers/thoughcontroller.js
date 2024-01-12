@@ -8,19 +8,22 @@ const  thoughtController = {
     res.json(thoughts);
   }
 
-}
+},
 
-// ...
 
 
   
-  // POST thought
-//   router.post('/thoughts', async (req, res) => {
-//     const newThought = new Thought(req.body);
-//     await newThought.save();
-//     res.json(newThought);
-//   });
-  
+ // POST thought
+    async createThoughts(req, res) {
+    try {
+      const newThought = await Thought.create(req.body);
+      res.json(newThought);
+    } catch (error) {
+      // Handle any errors that occurred during creation
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 //   // PUT thought update
 //   router.put('/thoughts/:thoughtId', async (req, res) => {
 //     const updatedThought = await Thought.findByIdAndUpdate(req.params.thoughtId, req.body, { new: true });

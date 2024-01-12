@@ -6,6 +6,13 @@ const {
 
 router.route('/').get(getThoughts)
 
+//const router = require('express').Router();
+const {
+  createThoughts
+} = require('../../controllers/thoughcontroller');
+
+router.route('/').post(createThoughts)
+
 
 
 module.exports = router;
