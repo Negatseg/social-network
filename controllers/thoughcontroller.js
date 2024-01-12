@@ -6,15 +6,10 @@ const  thoughtController = {
   async getThoughts(req, res) {
     const thoughts = await Thought.find();
     res.json(thoughts);
-  }
-
-},
+  },
 
 
-
-  
- // POST thought
-    async createThoughts(req, res) {
+  async createThoughts(req, res) {
     try {
       const newThought = await Thought.create(req.body);
       res.json(newThought);
@@ -24,7 +19,15 @@ const  thoughtController = {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
-//   // PUT thought update
+  
+
+}
+
+
+
+  
+ // POST thought
+   // PUT thought update
 //   router.put('/thoughts/:thoughtId', async (req, res) => {
 //     const updatedThought = await Thought.findByIdAndUpdate(req.params.thoughtId, req.body, { new: true });
 //     res.json(updatedThought);
