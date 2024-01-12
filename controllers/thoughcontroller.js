@@ -8,8 +8,8 @@ const  thoughtController = {
     res.json(thoughts);
   },
   async getSingleThought(req, res) {
-    const singleThought = await User.findOne({
-      _id: req.params.userId
+    const singleThought = await Thought.findOne({
+      _id: req.params.thoughtId
     })
       .select('-__v')
     // .populate('friends').populate('thoughts')
@@ -30,20 +30,20 @@ const  thoughtController = {
 
   async updateThought(req, res) {
     const modifyThought = await Thought.findOneAndUpdate(
-      { _id: req.params.userId },
+      { _id: req.params.thoughtId },
       { $set: req.body },
       { runValidators: true, new: true }
     )
-    if(!modifyThought) {return res.status(404).json({message:"user not found"})}
+    if(!modifyThought) {return res.status(404).json({message:"Thought not found"})}
     res.json(modifyThought)
   },
 
   async deleteThought(req,res) {
     const removeThought = await Thought.findOneAndDelete(
-      {_id: req.params.userId}
+      {_id: req.params.thoughtId}
     )
-    if(!removeThought) {return res.status(404).json({message:"user not found"})}
-    res.json({message: "user deleted"})
+    if(!removeThought) {return res.status(404).json({message:"Thought not found"})}
+    res.json({message: "Thought deleted"})
   },
 
   // addFriend

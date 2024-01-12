@@ -8,6 +8,13 @@ router.route('/').get(getThoughts)
 
 //const router = require('express').Router();
 const {
+  getSingleThought
+} = require('../../controllers/thoughcontroller');
+
+router.route('/').get(getSingleThought)
+
+//const router = require('express').Router();
+const {
   createThoughts
 } = require('../../controllers/thoughcontroller');
 
