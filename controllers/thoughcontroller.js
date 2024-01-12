@@ -35,7 +35,7 @@ const  thoughtController = {
       { runValidators: true, new: true }
     )
     if(!modifyThought) {return res.status(404).json({message:"Thought not found"})}
-    res.json(modifyThought)
+    res.json({"message":"Thought Updated"})
   },
 
   async deleteThought(req,res) {

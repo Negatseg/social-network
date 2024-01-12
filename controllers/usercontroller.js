@@ -29,7 +29,7 @@ const userController = {
       { runValidators: true, new: true }
     )
     if(!modifyUser) {return res.status(404).json({message:"user not found"})}
-    res.json(modifyUser)
+    res.json({"message": "User updated"})
   },
 
   async deleteUser(req,res) {
