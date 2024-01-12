@@ -14,5 +14,20 @@ const {
 router.route('/').post(createThoughts)
 
 
+const {
+  updateThought
+} = require('../../controllers/thoughcontroller');
+
+router.route('/').put(updateThought)
+
+
+const {
+  deleteThought
+} = require('../../controllers/thoughcontroller');
+
+router.route('/').delete(deleteThought)
+
+
+
 
 module.exports = router;

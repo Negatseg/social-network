@@ -7,6 +7,14 @@ const  thoughtController = {
     const thoughts = await Thought.find();
     res.json(thoughts);
   },
+  async getSingleThought(req, res) {
+    const singleThought = await User.findOne({
+      _id: req.params.userId
+    })
+      .select('-__v')
+    // .populate('friends').populate('thoughts')
+    res.json(singleThought)
+  },
 
 
   async createThoughts(req, res) {
@@ -18,7 +26,32 @@ const  thoughtController = {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  }
+  },
+
+  async updateThought(req, res) {
+    const modifyThought = await Thought.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    )
+    if(!modifyThought) {return res.status(404).json({message:"user not found"})}
+    res.json(modifyThought)
+  },
+
+  async deleteThought(req,res) {
+    const removeThought = await Thought.findOneAndDelete(
+      {_id: req.params.userId}
+    )
+    if(!removeThought) {return res.status(404).json({message:"user not found"})}
+    res.json({message: "user deleted"})
+  },
+
+  // addFriend
+  // async addFriend(req, res) {
+  //   const newFriend = await User.create(req.body)
+  //   res.json(newFriend)
+  // },
+
   
 
 }
