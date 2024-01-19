@@ -35,6 +35,26 @@ const {
 router.route('/:thoughtId').delete(deleteThought)
 
 
+// const {
+//   createReaction
+// } = require('../../controllers/thoughcontroller');
+
+// router.route('/:thoughId/thoughts/:thoughtId').post(createReaction)
+
+
+// const {
+//   removeReaction
+// } = require('../../controllers/thoughcontroller');
+
+// router.route('/:thoughId/thoughts/:thoughtId').delete(removeReaction)
+
+// Route definitions
+const { 
+  createReaction, removeReaction
+ } = require('../../controllers/thoughtcontroller');
+
+router.route('/:thoughId/thoughts/:thoughtId').post(createReaction);
+router.route('/:thoughId/thoughts/:thoughtId').delete(removeReaction);
 
 
 module.exports = router;
