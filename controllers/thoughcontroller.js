@@ -48,9 +48,9 @@ const  thoughtController = {
 
 // createReaction
 async createReaction(req, res) {
-  const updatedThought = await Thought.findByIdAndUpdate(
-    { _id: req.params.thoughId },
-    { $addToSet: { reactions: { thoughtId: req.params.thoughtId } } },
+  const updatedThought = await Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { $addToSet: { reactions:  req.body } },
     { new: true } // Return the updated document
   );
   res.json(updatedThought);
@@ -59,15 +59,21 @@ async createReaction(req, res) {
 
 // removeReaction
 async removeReaction(req, res) {
-  const removedReaction = await Thought.findByIdAndUpdate(
-    { _id: req.params.thoughId },
-    { $pull: { reactions: { thoughtId: req.params.thoughtId } } },
-    { new: true } // Return the updated document
-  );
-  if (!removedReaction) {
-    return res.status(404).json({ message: "Reaction not found" });
+  try{
+    const removedReaction = await Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { new: true } // Return the updated document
+    );
+    if (!removedReaction) {
+      return res.status(404).json({ message: "Reaction not found" });
+    }
+    res.json({ message: "Reaction Removed" });
+  } catch(error){
+    console.log(error)
+    res.status(500).json(error)
   }
-  res.json({ message: "Reaction Removed" });
+ 
 },
 
 

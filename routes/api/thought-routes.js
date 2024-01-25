@@ -51,10 +51,10 @@ router.route('/:thoughtId').delete(deleteThought)
 // Route definitions
 const { 
   createReaction, removeReaction
- } = require('../../controllers/thoughtcontroller');
+ } = require('../../controllers/thoughcontroller');
 
-router.route('/:thoughId/thoughts/:thoughtId').post(createReaction);
-router.route('/:thoughId/thoughts/:thoughtId').delete(removeReaction);
+router.route('/:thoughtId/reactions').post(createReaction);
+router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
 
 
 module.exports = router;
